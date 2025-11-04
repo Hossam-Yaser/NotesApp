@@ -1,0 +1,28 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Ignore platform-specific folders
+/android/
+/ios/
+/linux/
+/macos/
+/windows/
+/web/
+
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Other system files
+.DS_Store
+*.lock
