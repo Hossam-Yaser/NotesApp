@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app_using_hive/views/home_view.dart';
 
 void main() {
   runApp(const NotesApp());
@@ -9,6 +10,16 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
+
+      debugShowCheckedModeBanner: false,
+      routes: _routes,
+      initialRoute: HomeView.id,
+    );
   }
 }
+
+Map<String, Widget Function(BuildContext)> _routes = {
+  HomeView.id: (context) => HomeView(),
+};
