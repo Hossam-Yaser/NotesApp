@@ -8,7 +8,12 @@ class NotesViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(children: [CustomAppbar(), Notesitemlistviewwidget()]),
+      child: Column(
+        children: [
+          CustomAppbar(TitleText: "Notes"),
+          Notesitemlistviewwidget(),
+        ],
+      ),
     );
   }
 }

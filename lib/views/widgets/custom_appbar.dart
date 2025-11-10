@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_using_hive/views/widgets/custom_search_icon.dart';
 
+// ignore: must_be_immutable
 class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({super.key});
+  late String? TitleText;
+  late IconData customIcon;
+  void Function()? onPressed;
+  CustomAppbar({
+    required this.TitleText,
+    this.customIcon = Icons.search,
+    this.onPressed,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +20,11 @@ class CustomAppbar extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "Note",
+            TitleText!,
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
           ),
           Spacer(),
-          CustomSearchIcon(),
+          CustomSearchIcon(customIcon: customIcon, onPressed: onPressed),
         ],
       ),
     );

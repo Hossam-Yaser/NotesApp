@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomSearchIcon extends StatelessWidget {
-  const CustomSearchIcon({super.key});
+  late IconData customIcon;
+  void Function()? onPressed;
+  CustomSearchIcon({required this.customIcon, this.onPressed, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,10 @@ class CustomSearchIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
-        child: IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 30)),
+        child: IconButton(
+          onPressed: onPressed,
+          icon: Icon(customIcon, size: 30),
+        ),
       ),
     );
   }
