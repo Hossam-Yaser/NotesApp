@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
                 child: SingleChildScrollView(
-                  // 👇 Makes it scrollable when keyboard appears
+                  //  Makes it scrollable when keyboard appears
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -36,7 +36,7 @@ class HomeView extends StatelessWidget {
                     ),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        // 👇 Keeps it around half screen when keyboard is hidden
+                        //  Keeps it around half screen when keyboard is hidden
                         maxHeight: MediaQuery.of(context).size.height * 0.5,
                       ),
                       child: const AddNoteBottomSheet(),
@@ -74,7 +74,7 @@ class AddNoteBottomSheet extends StatelessWidget {
           FloatingActionButton.extended(
             onPressed: () {},
             label: Text(
-              true ? "Add" : "Update",
+              "Add",
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             icon: const Icon(Icons.save),

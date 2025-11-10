@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app_using_hive/views/edit_note_view.dart';
 import 'package:notes_app_using_hive/views/widgets/noteitem_widget.dart';
 
 class Notesitemlistviewwidget extends StatelessWidget {
@@ -13,7 +14,12 @@ class Notesitemlistviewwidget extends StatelessWidget {
           padding: EdgeInsets.zero,
           itemCount: 10,
           itemBuilder: (context, index) {
-            return NoteitemWidget();
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(EditNoteView.id);
+              },
+              child: NoteitemWidget(),
+            );
           },
         ),
       ),

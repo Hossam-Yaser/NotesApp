@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app_using_hive/views/edit_note_view.dart';
 import 'package:notes_app_using_hive/views/home_view.dart';
 
 void main() {
@@ -22,4 +23,5 @@ class NotesApp extends StatelessWidget {
 
 Map<String, Widget Function(BuildContext)> _routes = {
   HomeView.id: (context) => HomeView(),
+  EditNoteView.id: (context) => EditNoteView(),
 };
