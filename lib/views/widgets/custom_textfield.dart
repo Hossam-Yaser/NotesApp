@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomTextfield extends StatelessWidget {
   final String labelText;
   final String hintText;
   final TextEditingController? controller;
   final int maxLines;
-  final Function(String)? onChanged;
+  void Function(String?)? onSaved;
 
-  const CustomTextfield({
+  CustomTextfield({
     super.key,
     required this.labelText,
     required this.hintText,
     this.controller,
-    this.onChanged,
+    this.onSaved,
     this.maxLines = 1,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
-      onChanged: onChanged,
+      onSaved: onSaved,
       maxLines: maxLines,
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return "Field is required";
+        } else {
+          return null;
+        }
+      },
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

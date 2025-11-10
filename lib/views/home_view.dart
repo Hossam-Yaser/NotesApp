@@ -9,7 +9,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NotesViewBody(),
+      body: const NotesViewBody(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.cyan,
         shape: CircleBorder(),
@@ -21,33 +21,39 @@ class HomeView extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
             ),
             builder: (context) {
-              return AnimatedPadding(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeOut,
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                child: SingleChildScrollView(
-                  //  Makes it scrollable when keyboard appears
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        //  Keeps it around half screen when keyboard is hidden
-                        maxHeight: MediaQuery.of(context).size.height * 0.5,
-                      ),
-                      child: const AddNoteBottomSheet(),
-                    ),
-                  ),
-                ),
-              );
+              return AddNoteCustomWidget();
             },
           );
         },
         child: Icon(Icons.add, color: Colors.black),
+      ),
+    );
+  }
+}
+
+class AddNoteCustomWidget extends StatefulWidget {
+  const AddNoteCustomWidget({super.key});
+
+  @override
+  State<AddNoteCustomWidget> createState() => _AddNoteCustomWidgetState();
+}
+
+class _AddNoteCustomWidgetState extends State<AddNoteCustomWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedPadding(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.top),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16, right: 12, left: 12, top: 8),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            //  Keeps it around half screen when keyboard is hidden
+            maxHeight: MediaQuery.of(context).size.height * 0.5,
+          ),
+          child: const AddNoteBottomSheet(),
+        ),
       ),
     );
   }
@@ -58,28 +64,67 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          SizedBox(height: 30),
-          CustomTextfield(labelText: "Title", hintText: "Write Note Titel "),
-          SizedBox(height: 30),
-          CustomTextfield(
-            labelText: "Description",
-            hintText: "Write Note Description",
-            maxLines: 6,
-          ),
-          SizedBox(height: 50),
-          FloatingActionButton.extended(
-            onPressed: () {},
-            label: Text(
-              "Add",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Padding(padding: const EdgeInsets.all(16), child: AddNoteForm());
+  }
+}
+
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({super.key});
+
+  @override
+  State<AddNoteForm> createState() => _AddNoteFormState();
+}
+
+class _AddNoteFormState extends State<AddNoteForm> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? title;
+  String? supTitle;
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Form(
+        key: formKey,
+        autovalidateMode: autovalidateMode,
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            CustomTextfield(
+              onSaved: (value) {
+                title = value;
+              },
+              labelText: "Title",
+              hintText: "Write Note Titel ",
             ),
-            icon: const Icon(Icons.save),
-          ),
-        ],
+            const SizedBox(height: 30),
+            CustomTextfield(
+              onSaved: (value) {
+                supTitle = value;
+              },
+              labelText: "Description",
+              hintText: "Write Note Description",
+              maxLines: 6,
+            ),
+            const SizedBox(height: 50),
+            FloatingActionButton.extended(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState!.save();
+                } else {
+                  autovalidateMode = AutovalidateMode.always;
+                }
+              },
+              label: Text(
+                "Add",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              icon: const Icon(Icons.save),
+            ),
+          ],
+        ),
       ),
     );
   }
