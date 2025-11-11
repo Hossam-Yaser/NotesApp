@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class NoteitemWidget extends StatelessWidget {
-  const NoteitemWidget({super.key});
+  const NoteitemWidget({
+    super.key,
+    required this.title,
+    required this.suptitle,
+    required this.dateTime,
+    required this.color,
+  });
+  final String title;
+  final String suptitle;
+  final String dateTime;
+  final int color;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +21,7 @@ class NoteitemWidget extends StatelessWidget {
       width: double.infinity,
 
       decoration: BoxDecoration(
-        color: Colors.amber,
+        color: Color(color),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -19,7 +29,7 @@ class NoteitemWidget extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              "This is the title",
+              title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 26, color: Colors.black),
@@ -27,7 +37,7 @@ class NoteitemWidget extends StatelessWidget {
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 16),
               child: Text(
-                "This is the subtitle with two lines and saflsdsdafsdlafhjlskjhdflkjsafkljaslkfjsalkdjfhlksajdflkjs;",
+                suptitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -44,7 +54,7 @@ class NoteitemWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 24),
             child: Text(
-              "Time",
+              dateTime,
               style: TextStyle(color: Colors.black, fontSize: 18),
             ),
           ),
