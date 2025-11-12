@@ -31,50 +31,52 @@ class _EditNoteViewState extends State<EditNoteView> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              CustomAppbar(
-                TitleText: "Edit Notes",
-                customIcon: Icons.check,
-                onPressed: () {
-                  final title = titleController.text.trim();
-                  final supTitle = supTitleController.text.trim();
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomAppbar(
+                  TitleText: "Edit Notes",
+                  customIcon: Icons.check,
+                  onPressed: () {
+                    final title = titleController.text.trim();
+                    final supTitle = supTitleController.text.trim();
 
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
 
-                    existingNote.title = title;
-                    existingNote.subTitle = supTitle;
-                    existingNote.save();
-                    Navigator.pop(context);
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                  }
-                },
-              ),
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 30),
-                    CustomTextfield(
-                      labelText: "Title",
-                      hintText: "Edit Note Titel",
-                      controller: titleController,
-                    ),
-                    const SizedBox(height: 30),
-                    CustomTextfield(
-                      labelText: "Description",
-                      hintText: "Edit Note Description",
-                      maxLines: 6,
-                      controller: supTitleController,
-                    ),
-                    SizedBox(height: 60),
-                    EditnoteColorslistview(note: existingNote),
-                  ],
+                      existingNote.title = title;
+                      existingNote.subTitle = supTitle;
+                      existingNote.save();
+                      Navigator.pop(context);
+                    } else {
+                      autovalidateMode = AutovalidateMode.always;
+                    }
+                  },
                 ),
-              ),
-            ],
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      CustomTextfield(
+                        labelText: "Title",
+                        hintText: "Edit Note Titel",
+                        controller: titleController,
+                      ),
+                      const SizedBox(height: 30),
+                      CustomTextfield(
+                        labelText: "Description",
+                        hintText: "Edit Note Description",
+                        maxLines: 6,
+                        controller: supTitleController,
+                      ),
+                      SizedBox(height: 60),
+                      EditnoteColorslistview(note: existingNote),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

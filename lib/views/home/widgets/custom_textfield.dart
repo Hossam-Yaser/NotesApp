@@ -7,6 +7,7 @@ class CustomTextfield extends StatelessWidget {
   final TextEditingController? controller;
   final int maxLines;
   void Function(String?)? onSaved;
+  void Function(String)? onChanged;
 
   CustomTextfield({
     super.key,
@@ -15,6 +16,7 @@ class CustomTextfield extends StatelessWidget {
     this.controller,
     this.onSaved,
     this.maxLines = 1,
+    this.onChanged,
   });
 
   @override
@@ -22,6 +24,7 @@ class CustomTextfield extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onSaved: onSaved,
+      onChanged: onChanged,
       maxLines: maxLines,
       validator: (value) {
         if (value?.isEmpty ?? true) {

@@ -6,6 +6,7 @@ import 'package:notes_app_using_hive/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app_using_hive/models/note_model.dart';
 import 'package:notes_app_using_hive/views/editnote/edit_note_view.dart';
 import 'package:notes_app_using_hive/views/home/home_view.dart';
+import 'package:notes_app_using_hive/views/search/search_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,4 +37,5 @@ class NotesApp extends StatelessWidget {
 Map<String, Widget Function(BuildContext)> _routes = {
   HomeView.id: (context) => HomeView(),
   EditNoteView.id: (context) => EditNoteView(),
+  SearchView.id: (context) => SearchView(),
 };
