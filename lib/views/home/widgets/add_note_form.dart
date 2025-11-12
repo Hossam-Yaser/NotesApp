@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app_using_hive/cubits/add_note_cubit/add_note_cubit_cubit.dart';
 import 'package:notes_app_using_hive/models/note_model.dart';
-import 'package:notes_app_using_hive/views/widgets/custom_textfield.dart';
+import 'package:notes_app_using_hive/views/home/widgets/colorslistview.dart';
+import 'package:notes_app_using_hive/views/home/widgets/custom_textfield.dart';
 
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({super.key});
@@ -43,6 +44,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
               hintText: "Write Note Description",
               maxLines: 6,
             ),
+            const SizedBox(height: 20),
+            Colorslistview(),
             const SizedBox(height: 40),
             Container(
               width: double.infinity,
@@ -52,15 +55,16 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 builder: (context, state) {
                   isLoading = state is AddNoteLoading ? true : false;
                   return FloatingActionButton.extended(
+                    backgroundColor: Color(0xff9FCC2E),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
                         var noteModel = NoteModel(
                           title: title!,
-                          subTitle: supTitle!,
                           date: DateFormat(
                             'dd MMM yyyy',
                           ).format(DateTime.now()),
+                          subTitle: supTitle!,
 
                           color: Colors.blueGrey.value,
                         );
@@ -72,6 +76,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         setState(() {});
                       }
                     },
+
                     label: isLoading
                         ? const CircularProgressIndicator()
                         : const Text(
@@ -79,9 +84,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
-                    icon: isLoading ? null : const Icon(Icons.save),
+                    icon: isLoading
+                        ? null
+                        : const Icon(Icons.save, color: Colors.black),
                   );
                 },
               ),

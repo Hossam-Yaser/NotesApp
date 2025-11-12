@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_using_hive/views/widgets/custom_search_icon.dart';
+import 'package:notes_app_using_hive/views/home/widgets/custom_search_icon.dart';
 
 // ignore: must_be_immutable
 class CustomAppbar extends StatelessWidget {

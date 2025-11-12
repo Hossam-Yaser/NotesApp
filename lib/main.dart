@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_app_using_hive/constatnts.dart';
+import 'package:notes_app_using_hive/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app_using_hive/models/note_model.dart';
-import 'package:notes_app_using_hive/views/edit_note_view.dart';
-import 'package:notes_app_using_hive/views/home_view.dart';
+import 'package:notes_app_using_hive/views/editnote/edit_note_view.dart';
+import 'package:notes_app_using_hive/views/home/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,12 +20,15 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
+    return BlocProvider(
+      create: (context) => NotesCubit(),
+      child: MaterialApp(
+        theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
 
-      debugShowCheckedModeBanner: false,
-      routes: _routes,
-      initialRoute: HomeView.id,
+        debugShowCheckedModeBanner: false,
+        routes: _routes,
+        initialRoute: HomeView.id,
+      ),
     );
   }
 }
