@@ -9,7 +9,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const NotesViewBody(),
+      body: NotesViewBody(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xff9FCC2E),
         shape: CircleBorder(),
