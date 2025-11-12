@@ -12,11 +12,16 @@ class EditnoteColorslistview extends StatefulWidget {
 }
 
 class _EditnoteColorslistviewState extends State<EditnoteColorslistview> {
-  int currentIndex = 0;
+  late int currentIndex;
+
+  @override
+  void initState() {
+    currentIndex = kColors.indexWhere((color) => color == widget.note.color);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    currentIndex = kColors.indexWhere((color) => color == widget.note.color);
-
     return SizedBox(
       height: 64,
       child: ListView.builder(
